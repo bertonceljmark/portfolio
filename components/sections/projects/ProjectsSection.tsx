@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ProjectModal from "./ProjectModal";
 
 const normalTextClassname =
-  "text-white text-2xl tracking-wider p-1 w-full text-center border-dotted border-transparent border-2";
+  "text-white text-2xl tracking-wider p-1 w-full text-center border-dotted border-transparent border-2 h-16";
 const selectedTextClassname = `${normalTextClassname} bg-[#000080] !border-yellow-500`;
 
 const ProjectsSection = () => {
@@ -69,7 +69,7 @@ const ProjectsSection = () => {
         {projects.map((project) => (
           <div
             key={project.id}
-            className="cursor-pointer flex flex-col items-center h-fit"
+            className="cursor-pointer flex flex-col items-center h-fit max-w-32"
             onClick={() => onProjectClick(project.id)}
           >
             <div
