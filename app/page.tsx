@@ -7,8 +7,9 @@ import ProjectsSection from "@/components/sections/projects/ProjectsSection";
 import { useEffect, useRef, useState } from "react";
 
 interface ISectionItem {
-  component: () => JSX.Element;
+  component: (props: any) => JSX.Element;
   props: ISectionOptional;
+  componentProps?: Record<string, unknown>;
 }
 
 const sections: ISectionItem[] = [
@@ -21,6 +22,8 @@ const sections: ISectionItem[] = [
 ];
 
 export default function Home() {
+  const [opened, setOpened] = useState<number[]>([]);
+  const [navItems, setNavItems] = useState<number[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
 
@@ -66,7 +69,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
+      <NavBar navItems={navItems} opened={opened} setOpened={setOpened} />
       <main className="flex flex-col snap-y snap-mandatory overflow-y-scroll h-dvh hide-scrollbar">
         <ScrollIndicator activeIndex={activeIndex} sectionsNum={sectionsNum} />
         {sections.map(({ component: Component, props }, index) => (
@@ -76,7 +79,12 @@ export default function Home() {
             sectionRefs={sectionRefs}
             index={index}
           >
-            <Component />
+            <Component
+              opened={opened}
+              navItems={navItems}
+              setOpened={setOpened}
+              setNavItems={setNavItems}
+            />
           </Section>
         ))}
       </main>
