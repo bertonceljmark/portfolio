@@ -100,7 +100,7 @@ const ProjectsSection = ({
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full pb-[44px]">
       {projects.map((project) => (
         <div
           key={project.id}

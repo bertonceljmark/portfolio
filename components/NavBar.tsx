@@ -49,7 +49,7 @@ const NavBar = ({ navItems, opened, setOpened }: IProps) => {
   };
 
   return (
-    <AppBar className="z-10 bottom-0 !top-auto">
+    <AppBar className="z-10 bottom-0 !top-auto !absolute">
       <Toolbar className="max-w-full">
         <div className="flex gap-3 max-w-full">
           <div className="relative flex-shrink-0">

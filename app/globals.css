@@ -49,4 +49,20 @@ body {
     filter: invert(12%) sepia(99%) saturate(3000%) hue-rotate(160deg)
       brightness(50%) contrast(228%);
   }
+
+  .crawl {
+    font-size: 300%;
+    line-height: 150%;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%) perspective(600px) rotateX(20deg);
+    transform-origin: 50% 100%;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent,
+      #000 60%,
+      #000 100%
+    );
+    mask-image: linear-gradient(180deg, transparent, #000 60%, #000 100%);
+  }
 }

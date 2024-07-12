@@ -2,8 +2,9 @@
 import NavBar from "@/components/NavBar";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import Section, { ISectionOptional } from "@/components/Section";
+import ExpirienceSection from "@/components/sections/experience/ExperienceSection";
 import HeroSection from "@/components/sections/hero/HeroSection";
-import ProjectsSection from "@/components/sections/projects/ProjectsSection";
+import DesktopContainer from "@/components/sections/projects/DesktopContainer";
 import { useEffect, useRef, useState } from "react";
 
 interface ISectionItem {
@@ -17,13 +18,11 @@ const sections: ISectionItem[] = [
     component: HeroSection,
     props: { backgroundPath: "/backgrounds/clouds.jpg", addTexture: true },
   },
-  { component: ProjectsSection, props: { backgroundColor: "teal" } },
-  { component: HeroSection, props: { backgroundColor: "teal" } },
+  { component: DesktopContainer, props: { backgroundColor: "teal" } },
+  { component: ExpirienceSection, props: { backgroundColor: "black" } },
 ];
 
 export default function Home() {
-  const [opened, setOpened] = useState<number[]>([]);
-  const [navItems, setNavItems] = useState<number[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
 
@@ -69,7 +68,6 @@ export default function Home() {
 
   return (
     <>
-      <NavBar navItems={navItems} opened={opened} setOpened={setOpened} />
       <main className="flex flex-col snap-y snap-mandatory overflow-y-scroll h-dvh hide-scrollbar">
         <ScrollIndicator activeIndex={activeIndex} sectionsNum={sectionsNum} />
         {sections.map(({ component: Component, props }, index) => (
@@ -79,12 +77,7 @@ export default function Home() {
             sectionRefs={sectionRefs}
             index={index}
           >
-            <Component
-              opened={opened}
-              navItems={navItems}
-              setOpened={setOpened}
-              setNavItems={setNavItems}
-            />
+            <Component />
           </Section>
         ))}
       </main>

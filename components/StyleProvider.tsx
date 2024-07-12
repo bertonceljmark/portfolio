@@ -23,9 +23,20 @@ const StyleProvider = ({ children }: { children: ReactNode }) => {
     font-weight: bold;
     font-style: normal
   }
+  @font-face {
+    font-family: 'trade-gothic-pro-condensed-bold';
+    src: url('/fonts/trade-gothic-pro-condensed-bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal
+  }
+    
   body {
     font-family: 'ms_sans_serif';
   }
+
+  .star-wars-font {
+    font-family: 'trade-gothic-pro-condensed-bold';
+    }
 `;
 
   return (
