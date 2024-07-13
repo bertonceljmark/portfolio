@@ -119,7 +119,7 @@ const ProjectsSection = ({
         {projects.map((project) => (
           <div
             key={project.id}
-            className="cursor-pointer flex flex-col items-center h-fit max-w-32"
+            className="cursor-pointer flex flex-col items-center h-fit w-24"
             onClick={() => onProjectClick(project.id)}
           >
             <div

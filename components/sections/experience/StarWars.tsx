@@ -1,76 +1,84 @@
+"use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { motion, animate } from "framer-motion";
+import { useCallback, useEffect, useRef } from "react";
+import { animate, useInView } from "framer-motion";
 
 const StarWars = () => {
   const intro = useRef<HTMLDivElement>(null);
   const title = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLDivElement>(null);
+  const isInView = useInView(intro, { once: true });
 
-  const animationSequence = () => {
-    if (!intro.current || !title.current || !content.current) return;
+  const animationSequence = useCallback(() => {
+    if (!intro.current || !title.current || !content.current || !isInView) {
+      return;
+    }
 
     return [
       [intro.current, { opacity: 1 }, { duration: 4.5 }],
-      [intro.current, { opacity: 0 }, { duration: 1.5 }],
+      [intro.current, { opacity: 0 }, { duration: 1.5, delay: 3 }],
       [title.current, { opacity: 1 }, { duration: 0.5 }],
-      [title.current, { scale: 0.05 }, { duration: 8 }],
-      [title.current, { opacity: 0 }, { duration: 1.5 }],
+      [title.current, { scale: 0.05, opacity: 0 }, { duration: 8, delay: 3 }],
     ];
-  };
+  }, [isInView]);
+
+  const animationContentSequence = useCallback(() => {
+    if (!content.current || !isInView) {
+      return;
+    }
+
+    return [[content.current, { top: "0dvh" }, { delay: 12.5, duration: 10 }]];
+  }, [isInView]);
 
   useEffect(() => {
     const sequence = animationSequence();
 
     if (sequence) {
       const animation = animate(sequence as any[]);
+      const animationContent = animate(animationContentSequence() as any[]);
 
       animation.play();
+      animationContent.play();
     }
-  }, []);
+  }, [animationSequence, animationContentSequence]);
 
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      transition={{ duration: 5 }}
-      variants={{
-        visible: { opacity: 1, scale: 1 },
-        hidden: { opacity: 0, scale: 0 },
-      }}
+    <div
+      ref={container}
       className="h-full w-full text-[#FDD404] star-wars-font font-bold text-sm xl:text-4xl relative"
     >
       <section
         ref={intro}
         className="opacity-0 absolute left-0 right-0 top-0 bottom-0 m-auto h-fit w-fit text-[rgb(75,_213,_238)]"
       >
-        <p>
+        <p className="text-center">
           A long time ago, in a galaxy far,
           <br /> far away....
         </p>
       </section>
       <section
         ref={title}
-        className="opacity-0 absolute left-0 right-0 top-0 bottom-0 m-auto h-fit w-fit"
+        className="opacity-0 absolute left-0 right-0 top-0 bottom-0 m-auto max-w-[80vw] w-[912px] h-auto"
       >
         <Image
-          src="/icons/w95start.png"
-          alt="Windows 95 logo"
-          width={32}
-          height={32}
+          src="/img/employment-wars.png"
+          style={{ objectFit: "contain" }}
+          fill
+          sizes="100vw"
+          alt="employment wars"
         />
       </section>
-      <section className="left-0 right-0 top-0 bottom-[100%] m-auto h-[200%] w-[120%] relative overflow-y-scroll overflow-x-hidden crawl z-50 hide-scrollbar">
+      <section className="left-0 right-0 top-0 bottom-[100dvh] relative m-auto h-[200dvh] w-[110%] overflow-y-scroll overflow-x-hidden crawl z-50 hide-scrollbar">
         <div
-          className="left-0 right-0 top-0 mx-auto absolute text-justify crawl-content"
+          className="left-0 right-0 top-[210dvh] absolute mx-auto text-justify crawl-content pt-96"
           ref={content}
         >
-          <h1 className="mt-[100%] text-center">Episode X</h1>
+          <h1 className="text-center">Episode X</h1>
           <h2 className="episode-title text-[250%] leading-[1] mb-28 transform-[scale(1,_1.5)] text-center">
             WORK EXPERIENCE
           </h2>
-          <p className="mb-24 leading-[1.33]">
+          <div className="mb-24 h-fit leading-[1.33] overflow-hidden">
             <p className="mb-12">1. Inovakom - Technical support (2019-2022)</p>
             <p className="mb-12">
               Inovakom is a company that works with smart intercom systems and
@@ -85,8 +93,8 @@ const StarWars = () => {
               independant research, and the ability to quickly learn new
               technologies.
             </p>
-          </p>
-          <p className="mb-24 leading-[1.33]">
+          </div>
+          <div className="mb-24 h-fit leading-[1.33] overflow-hidden">
             <p className="mb-12">2. Httpool - Frontend developer (2022-2024)</p>
             <p className="mb-12">
               Httpool (part of Aleph Group) is a digital marketing company that
@@ -107,8 +115,8 @@ const StarWars = () => {
               Technologies used: React, Redux, Typescript, Jest, Git, GraphQL,
               PHP(Symphony), Docker, Jira, Confluence, Bitbucket, Slack, Figma.
             </p>
-          </p>
-          <p className="mb-24 leading-[1.33]">
+          </div>
+          <div className="mb-24 leading-[1.33] h-fit overflow-hidden">
             <p className="mb-12">3. Emazing - Full stack developer (2024-)</p>
             <p className="mb-12">
               Emazing is a company that provides patient management for various
@@ -143,11 +151,11 @@ const StarWars = () => {
               Prisma, Google Analytics, Google Tag Manager, Google Ad Manager,
               Facebook Event Manager, Facebook API, Webflow, Retool, Figma.
             </p>
-          </p>
+          </div>
           <p className="mb-96">The saga continues...</p>
         </div>
       </section>
-    </motion.div>
+    </div>
   );
 };
 
