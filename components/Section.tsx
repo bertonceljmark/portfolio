@@ -48,7 +48,7 @@ const Section = ({
     <section
       className={`${
         backgroundColor ? colorVariants[backgroundColor] : ""
-      } relative min-h-dvh w-full overflow-hidden flex items-center justify-center snap-always snap-start`}
+      } relative min-h-dvh w-full overflow-hidden flex items-center justify-center snap-always snap-start bg-right`}
       style={backgroundStyle}
       ref={sectionRef}
     >

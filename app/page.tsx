@@ -2,6 +2,7 @@
 import NavBar from "@/components/NavBar";
 import ScrollIndicator from "@/components/ScrollIndicator";
 import Section, { ISectionOptional } from "@/components/Section";
+import ContactSection from "@/components/sections/contact/ContactSection";
 import ExpirienceSection from "@/components/sections/experience/ExperienceSection";
 import HeroSection from "@/components/sections/hero/HeroSection";
 import DesktopContainer from "@/components/sections/projects/DesktopContainer";
@@ -20,6 +21,10 @@ const sections: ISectionItem[] = [
   },
   { component: DesktopContainer, props: { backgroundColor: "teal" } },
   { component: ExpirienceSection, props: { backgroundColor: "black" } },
+  {
+    component: ContactSection,
+    props: { backgroundPath: "/backgrounds/nyan.gif" },
+  },
 ];
 
 export default function Home() {
