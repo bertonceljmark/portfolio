@@ -16,9 +16,10 @@ interface IProps {
   navItems: number[];
   opened: number[];
   setOpened: Dispatch<SetStateAction<number[]>>;
+  scrollToBottom: () => void;
 }
 
-const NavBar = ({ navItems, opened, setOpened }: IProps) => {
+const NavBar = ({ navItems, opened, setOpened, scrollToBottom }: IProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -67,7 +68,9 @@ const NavBar = ({ navItems, opened, setOpened }: IProps) => {
             </Button>
             {menuOpen && (
               <MenuList className="!absolute left-0 bottom-full">
-                <MenuListItem>Get in touch</MenuListItem>
+                <MenuListItem onClick={scrollToBottom}>
+                  Get in touch
+                </MenuListItem>
               </MenuList>
             )}
           </div>

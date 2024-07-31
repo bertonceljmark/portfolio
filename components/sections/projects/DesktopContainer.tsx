@@ -2,7 +2,11 @@ import NavBar from "@/components/NavBar";
 import { useState } from "react";
 import ProjectsSection from "./ProjectsSection";
 
-const DesktopContainer = () => {
+const DesktopContainer = ({
+  scrollToBottom,
+}: {
+  scrollToBottom: () => void;
+}) => {
   const [opened, setOpened] = useState<number[]>([]);
   const [navItems, setNavItems] = useState<number[]>([]);
 
@@ -14,7 +18,12 @@ const DesktopContainer = () => {
         setOpened={setOpened}
         setNavItems={setNavItems}
       />
-      <NavBar navItems={navItems} opened={opened} setOpened={setOpened} />
+      <NavBar
+        navItems={navItems}
+        opened={opened}
+        setOpened={setOpened}
+        scrollToBottom={scrollToBottom}
+      />
     </>
   );
 };

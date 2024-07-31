@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Monitor, Window, WindowContent, WindowHeader } from "react95";
 import Typewriter, { TypewriterClass } from "typewriter-effect";
 
-const HeroSection = () => {
+const HeroSection = ({ scrollToBottom }: { scrollToBottom: () => void }) => {
   const [errorOpen, setErrorOpen] = useState(false);
 
   const write = (typewriter: TypewriterClass, idx: number) => {
@@ -31,6 +31,9 @@ const HeroSection = () => {
       <div className="flex flex-col items-center justify-center gap-3">
         <h1 className="text-6xl font-bold">Hi, I&apos;m Mark</h1>
         <p className="text-3xl">I build cool web stuff</p>
+        <Button className="mt-2" onClick={scrollToBottom} size="sm">
+          Contact me
+        </Button>
       </div>
       <div className="relative">
         {errorOpen && (
