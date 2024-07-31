@@ -20,7 +20,7 @@ const projects = [
     technologies: ["NextJS", "TypeScript", "Tailwind", "Supabase"],
     links: {
       github: "",
-      website: "https://github.com/bertonceljmark/lawaai-frontend",
+      website: "https://holidaysplan.com/",
     },
     image: "/img/website-holidaysplan.png",
     iframe: "",
@@ -58,7 +58,7 @@ const projects = [
       "Website built as a part of my bachelor thesis. It's a personal website, where I showcase my (dead) DJ career. It was built before I realized how cool React is, so it's just plain HTML, CSS and JS.",
     technologies: ["HTML", "CSS", "JavaScript"],
     links: {
-      github: "",
+      github: "https://github.com/bertonceljmark/berti",
       website: "http://berti.vip/",
     },
     image: "/img/website-berti.png",
